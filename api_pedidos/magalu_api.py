@@ -1,16 +1,21 @@
-from http import HTTPStatus
 import os
+from http import HTTPStatus
 from uuid import UUID
-from api_pedidos.esquema import Item
-from api_pedidos.excecao import PedidoNaoEncontradoError, FalhaDeComunicacaoError
 
 import httpx
+
+from api_pedidos.esquema import Item
+from api_pedidos.excecao import (
+    FalhaDeComunicacaoError,
+    PedidoNaoEncontradoError,
+)
 
 # tenant e apikey fixos somente para demonstrações
 APIKEY = os.environ.get("APIKEY", "coloque aqui sua apikey")
 TENANT_ID = os.environ.get("TENANT_ID", "21fea73c-e244-497a-8540-be0d3c583596")
 MAGALU_API_URL = "https://alpha.api.magalu.com"
 MAESTRO_SERVICE_URL = f"{MAGALU_API_URL}/maestro/v1"
+
 
 def _recupera_itens_por_pacote(uuid_do_pedido, uuid_do_pacote):
     response = httpx.get(
@@ -42,7 +47,9 @@ def recuperar_itens_por_pedido(identificacao_do_pedido: UUID) -> list[Item]:
         itens = []
         for pacote in pacotes:
             itens.extend(
-                _recupera_itens_por_pacote(identificacao_do_pedido, pacote["uuid"])
+                _recupera_itens_por_pacote(
+                    identificacao_do_pedido, pacote["uuid"]
+                )
             )
         return itens
     except httpx.HTTPStatusError as exc:
