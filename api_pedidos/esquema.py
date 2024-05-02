@@ -7,3 +7,9 @@ class Item(BaseModel):
     image_url: str
     reference: str
     quantity: int
+
+class HealthCheckResponse(BaseModel):
+    status: str
+
+class ErrorResponse(BaseModel):
+    message: str
