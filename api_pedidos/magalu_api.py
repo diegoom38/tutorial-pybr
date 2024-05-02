@@ -19,7 +19,8 @@ MAESTRO_SERVICE_URL = f"{MAGALU_API_URL}/maestro/v1"
 
 def _recupera_itens_por_pacote(uuid_do_pedido, uuid_do_pacote):
     response = httpx.get(
-        f"{MAESTRO_SERVICE_URL}/orders/{uuid_do_pedido}/packages/{uuid_do_pacote}/items",
+        f"{MAESTRO_SERVICE_URL}/orders/{uuid_do_pedido}/packages/"
+        f"{uuid_do_pacote}/items",
         headers={"X-Api-Key": APIKEY, "X-Tenant-Id": TENANT_ID},
     )
     response.raise_for_status()

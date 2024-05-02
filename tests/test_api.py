@@ -48,7 +48,7 @@ def sobreescreve_recuperar_itens_por_pedido():
 
 
 class TestListarPedidos:
-    def test_quando_identificacao_do_pedido_invalido_um_erro_deve_ser_retornado(
+    def test_quando_identificado_pedido_invalido_um_erro_deve_ser_retornado(
         self, cliente
     ):
         resposta = cliente.get("/orders/valor-invalido/items")
